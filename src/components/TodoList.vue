@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
+            <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow">
                 <i class="checkBtn fa-solid fa-check" v-bind:class="{ checkBtnCompleted: todoItem.completed }" v-on:click="toggleComplete(todoItem, index)"></i>
                 <!-- Object 타입으로 바인딩된 값들의 요소에 접근한다. -->
                 <span v-bind:class="{ textCompleted: todoItem.completed }"> {{ todoItem.item }}  </span>
@@ -16,16 +16,12 @@
 
 <script>
 export default {
-    data: function(){
-        return{
-            todoItems: []
-        }
-    },
+    
+    props: ['propsdata'],
+
     methods: {
         removeTodo: function(todoItem, index){
-            console.log(todoItem, index);
-            localStorage.removeItem(todoItem);
-            this.todoItems.splice(index, 1);
+            this.$emit('removeItem', todoItem, index);
         },
         makeTestData: function(){
             localStorage.setItem('A', 'A');
@@ -43,16 +39,6 @@ export default {
             /** Update Local Storage Item */
             localStorage.removeItem(todoItem.item);
             localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-        }
-    },
-    created: function(){
-        if(localStorage.length > 0){
-            for(let locStKey of Object.keys(localStorage)){
-                if(locStKey != "loglevel:webpack-dev-server"){
-                    let locStValue = JSON.parse(localStorage.getItem(locStKey));
-                    if('item' in locStValue) { this.todoItems.push(locStValue); }
-                }
-            }
         }
     }
 }
