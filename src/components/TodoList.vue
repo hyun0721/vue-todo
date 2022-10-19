@@ -2,7 +2,7 @@
     <div>
         <ul>
             <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
-                <i class="checkBtn fa-solid fa-check" v-bind:class="{ checkBtncompleted: todoItem.completed }" v-on:click="toggleComplete(todoItem, index)"></i>
+                <i class="checkBtn fa-solid fa-check" v-bind:class="{ checkBtnCompleted: todoItem.completed }" v-on:click="toggleComplete(todoItem, index)"></i>
                 <!-- Object 타입으로 바인딩된 값들의 요소에 접근한다. -->
                 <span v-bind:class="{ textCompleted: todoItem.completed }"> {{ todoItem.item }}  </span>
                 <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 li { 
     display: flex;
