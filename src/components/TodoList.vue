@@ -23,6 +23,9 @@ export default {
         removeTodo: function(todoItem, index){
             this.$emit('removeItem', todoItem, index);
         },
+        toggleComplete: function(todoItem, index){
+            this.$emit('toggleItem', todoItem, index);
+        },
         makeTestData: function(){
             localStorage.setItem('A', 'A');
             localStorage.setItem('B', 'B');
@@ -31,14 +34,6 @@ export default {
             this.todoItems.push('A');
             this.todoItems.push('B');
             this.todoItems.push('C');
-        },
-        toggleComplete: function(todoItem, index){
-
-            todoItem.completed = !todoItem.completed;
-            
-            /** Update Local Storage Item */
-            localStorage.removeItem(todoItem.item);
-            localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
         }
     }
 }
