@@ -7,6 +7,21 @@
         <span class="addContainer" v-on:click="addTodo">
             <i class="fa-solid fa-plus"></i>
         </span>
+
+        <Modal :show="showModal" @close="showModal = false">
+            <h3 slot="header">
+                경고!
+            </h3>
+
+            <div slot="body">
+                무엇인가를 입력하세요.
+            </div>
+
+            <div slot="footer">
+                copy right
+            </div>
+
+        </Modal>
     </div>
 </template>
 
@@ -14,20 +29,22 @@
 import Modal from './common/Modal.vue';
 
 export default {
+    components: {
+        Modal
+    },
     data: function(){
         return {
-            newTodoItem: ""
+            newTodoItem: "",
+            showModal: false
         }
     },
     methods: {
         addTodo: function(){
             if(this.newTodoItem !== ''){
-                // let obj = { completed: false, item: this.newTodoItem } ;
-                // localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
-
                 this.$emit('addTodoItem', this.newTodoItem);
-
                 this.clearInput();  // 컴포넌트 비움.
+            }else{
+                this.showModal = !this.showModal;
             }
         },
         clearInput: function(){

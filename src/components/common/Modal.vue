@@ -11,6 +11,7 @@ export default {
         <div v-if="show" class="modal-mask">
             <div class="modal-wrapper">
                 <div class="modal-container">
+
                     <div class="modal-header">
                         <slot name="header">default header</slot>
                     </div>
@@ -22,9 +23,10 @@ export default {
                     <div class="modal-footer">
                         <slot name="footer">
                             default footer
-                            <button class="modal-default-button" @click="$emit('close')">OK</button>
                         </slot>
+                        <button class="modal-default-button" @click="$emit('close')">OK</button>
                     </div>
+
                 </div>
             </div>
         </div>
