@@ -1,6 +1,7 @@
 <template>
     <div>
-        <ul>
+        <!-- ul 태그로 트랜지션 효과를 부여. name(list)은 css 클래스와 연관됨. -->
+        <TransitionGroup name="list" tag="ul">
             <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow">
                 <i class="checkBtn fa-solid fa-check" v-bind:class="{ checkBtnCompleted: todoItem.completed }" v-on:click="toggleComplete(todoItem, index)"></i>
                 <!-- Object 타입으로 바인딩된 값들의 요소에 접근한다. -->
@@ -9,7 +10,7 @@
                     <i class="fa-solid fa-trash"></i>
                 </span>
             </li>
-        </ul>
+        </TransitionGroup>
         <button v-on:click="makeTestData()">test</button>
     </div>
 </template>
@@ -70,6 +71,18 @@ li {
 .textCompleted {
     text-decoration: line-through;
     color: #b3adad;
+}
+
+
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
 }
 
 </style>
