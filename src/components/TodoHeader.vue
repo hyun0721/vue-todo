@@ -1,13 +1,15 @@
 <template>
     <header>
-        <h1>TODO it !</h1>
+        <h1>{{ this.$store.state.headerText }}</h1>
     </header>
 </template>
 
 <script>
+
 export default {
 
 }
+
 </script>
 
 <!-- scoped: 스타일이 상속되지 않고 해당 컴포넌트에서만 유지됨. -->

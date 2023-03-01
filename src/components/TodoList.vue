@@ -2,10 +2,10 @@
     <div>
         <!-- ul 태그로 트랜지션 효과를 부여. name(list)은 css 클래스와 연관됨. -->
         <TransitionGroup name="list" tag="ul">
-            <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem" class="shadow">
+            <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem" class="shadow">
                 <i class="checkBtn fa-solid fa-check" v-bind:class="{ checkBtnCompleted: todoItem.completed }" v-on:click="toggleComplete(todoItem, index)"></i>
                 <!-- Object 타입으로 바인딩된 값들의 요소에 접근한다. -->
-                <span v-bind:class="{ textCompleted: todoItem.completed }"> {{ todoItem.item }}  </span>
+                <span v-bind:class="{ textCompleted: todoItem.completed }"> {{ todoItem.item }}</span>
                 <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
                     <i class="fa-solid fa-trash"></i>
                 </span>
