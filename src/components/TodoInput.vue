@@ -41,7 +41,9 @@ export default {
     methods: {
         addTodo: function(){
             if(this.newTodoItem !== ''){
-                this.$emit('addTodoItem', this.newTodoItem);
+                const text = this.newTodoItem.trim();
+                
+                this.$store.commit('addOneItem', text);
                 this.clearInput();  // 컴포넌트 비움.
             }else{
                 this.showModal = !this.showModal;
