@@ -3,10 +3,10 @@
         <!-- ul 태그로 트랜지션 효과를 부여. name(list)은 css 클래스와 연관됨. -->
         <TransitionGroup name="list" tag="ul">
             <li v-for="(todoItem, index) in this.todoItems" v-bind:key="todoItem" class="shadow">
-                <i class="checkBtn fa-solid fa-check" v-bind:class="{ checkBtnCompleted: todoItem.completed }" v-on:click="toggleComplete(todoItem, index)"></i>
+                <i class="checkBtn fa-solid fa-check" v-bind:class="{ checkBtnCompleted: todoItem.completed }" v-on:click="toggleComplete({todoItem, index})"></i>
                 <!-- Object 타입으로 바인딩된 값들의 요소에 접근한다. -->
                 <span v-bind:class="{ textCompleted: todoItem.completed }"> {{ todoItem.item }}</span>
-                <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+                <span class="removeBtn" v-on:click="removeTodo({todoItem, index})">
                     <i class="fa-solid fa-trash"></i>
                 </span>
             </li>
@@ -16,17 +16,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
 
     methods: {
-        removeTodo: function(todoItem, index){
-            this.$store.commit('removeOneItem', { todoItem, index });
-        },
-        toggleComplete: function(todoItem, index){
-            this.$store.commit('toggleOneComplete', { todoItem, index });
-        },
+
+        ...mapMutations({
+            removeTodo: 'removeOneItem',
+            toggleComplete: 'toggleOneComplete'
+        }),
+
         makeTestData: function(){
             localStorage.setItem('A', 'A');
             localStorage.setItem('B', 'B');
@@ -39,7 +39,6 @@ export default {
     },
 
     computed: {
-        // ...mapGetters(['storedTodoItems'])
         ...mapGetters({
             todoItems: 'storedTodoItems'
         })
